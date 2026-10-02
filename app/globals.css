@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/* Design tokens: plan/design-plan.md §3 */
+@theme {
+  --color-ink: #16121f;
+  --color-ink-2: #231d31;
+  --color-steel: #eef0f3;
+  --color-paper: #ffffff;
+  --color-line: #d5d8de;
+  --color-muted: #4a4558;
+  --color-workx: #d7261e;
+  --color-workx-deep: #a81a14;
+  --color-fi: #c9f23d;
+  --color-rotor: #5b3fd1;
+
+  --font-sans: var(--font-saira), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+html {
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--color-steel);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Condensed italic display, echoing the logo lettering. */
+.display {
+  font-variation-settings: "wdth" 68;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 0.95;
+  letter-spacing: -0.005em;
+}
+
+.condensed {
+  font-variation-settings: "wdth" 80;
+}
+
+/* Die-cut sticker edge, like the DongWorkx logo. */
+.sticker {
+  box-shadow: 0 0 0 3px var(--color-paper), 0 0 0 5px var(--color-ink), 6px 8px 0 5px rgb(22 18 31 / 0.35);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-rotor);
+  outline-offset: 2px;
+}
+
+.on-ink :focus-visible {
+  outline-color: var(--color-fi);
+}
+
+.scanline {
+  background-image: repeating-linear-gradient(to bottom, rgb(201 242 61 / 0.05) 0 1px, transparent 1px 4px);
+}
+
+.caret::after {
+  content: "▌";
+  margin-left: 2px;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes type-in {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.type-in {
+  animation: type-in 420ms steps(24, end) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
